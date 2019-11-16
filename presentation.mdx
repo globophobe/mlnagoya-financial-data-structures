@@ -1,0 +1,488 @@
+import aspect from '@mdx-deck/themes/aspect';
+import { syntaxHighlighter } from 'mdx-deck/themes'
+import theme from './theme';
+import arex from './assets/arex.jpg';
+import cover from './assets/cover.jpg';
+import marcos from './assets/marcos.jpg';
+import gigo from './assets/gigo.jpg';
+import candle from './assets/candle.jpg';
+import candleUpDown from './assets/candle-up-down.png';
+import candleCompare from './assets/compare-candles.png';
+import quantconnect from './assets/quantconnect.png';
+import bitcoin from './assets/bitcoin.png';
+import bitmex from './assets/bitmex.png';
+import hudsonthames from './assets/hudson-thames.png';
+import timeAuto from './assets/time-autocorrelation.png';
+import tickAuto from './assets/tick-autocorrelation.png';
+import volumeAuto from './assets/volume-autocorrelation.png';
+import partialNormality from './assets/partial-recovery-normality.png';
+import oct26Time from './assets/oct26-time.png';
+import oct26Tick from './assets/oct26-tick.png';
+import oct26Volume from './assets/oct26-volume.png';
+
+export const themes = [ aspect, syntaxHighlighter, theme ];
+
+# Different representations of Japanese Candlestick charts
+## ローソク足チャートの違う表現
+
+**＊矢印キーで進んでください＊**
+
+---
+
+# These slides are at Connpass. So you can check them out.
+## スライドはConnpassにアップされています。 是非みてください。
+
+---
+
+<SplitRight>
+
+<img style="border-radius: 35px;" width="80%" src={arex} />
+
+# My username on Connpass is "globophobe".
+## Connpassのユーザ名は「globophobe」です。
+
+</SplitRight>
+
+---
+
+# I am interested in day trading and investing.
+## 投資とデイトレードに興味があります。
+
+---
+
+# It is said that 95% of day traders lose money.
+## 95％のデイトレーダーのお金は損になると言われています。
+
+---
+
+# It is difficult to monitor the market all the time, so I would like to write algorithmic trading bots.
+## 常に市場を監視することは難しいため、ボットを作成したいと思います。
+
+---
+
+<SplitRight>
+
+<img width="65%" src={cover} />
+
+## Recently, I have been reading "Advances in Financial Machine Learning". 
+## 最近、「Advances in Financial Machine Learning」て言う本を読んでいます。
+
+</SplitRight>
+
+---
+
+<SplitRight>
+
+<img style="border-radius: 35px;" width="75%" src={marcos} />
+
+## The author Marcos Lopez de Prado was named "[Quant of the Year](https://jpm.pm-research.com/quant-of-2019)" by the [Journal of Portfolio Management](https://jpm.pm-research.com/).
+## 著者は、JPMにより「クォント オブ ザ イヤー」に選ばれました。
+
+</SplitRight>
+
+---
+
+# According to the author, "One day in the near future, ML will dominate finance...
+## 著者によると、「近い将来、MLが金融を支配して、、、
+
+---
+
+# ...science will curtail guessing, and investing will not mean gambling."
+## 科学は推測を削減し、そしてその近く将来には、投資をする事はもうギャンブルの意味もしません。」
+
+---
+
+# Chapter 2 is about Financial Data Structures.
+## 第2章では財務データ構造について
+
+---
+
+# The most popular representation of financial price data is time-based Japanese candlestick charts.
+## 金融価格データの最も一般的な表現は、時間ベースの日本のローソク足チャートです。
+
+---
+
+<SplitRight>
+
+<img style="border-radius: 35px;" width="95%" src={candle} />
+
+# Candlesticks contain open, high, low, and close data.
+## ローソク足には、始値、高値、安値、終値のデータが含まれています。 
+
+</SplitRight>
+
+---
+
+<SplitRight>
+
+<img style="border-radius: 35px;" width="95%" src={candleUpDown} />
+
+# There are up candles, and down candles.
+## アップローソク足とダウンローソク足があります。
+
+</SplitRight>
+
+---
+
+<SplitRight>
+
+<img style="border-radius: 35px;" width="95%" src={candleCompare} />
+
+# Candlestick charts are equivalent to line charts, calculated using the close value.
+## ローソク足チャートは、終値を使用して計算される折れ線チャートと同等です。
+
+</SplitRight>
+
+---
+
+# However, there are problems with time-based bars.
+## しかし、時間ベースのローソク足バーには問題があります。
+
+---
+
+<SplitRight>
+
+<img width="95%" src={gigo} />
+
+# It is said "Garbage In, Garbage Out".
+## 「ガベージイン、ガベージアウト」と言われています。
+
+</SplitRight>
+
+---
+
+# According to the Lopez de Prado, time bars should be avoided because:
+## 著者によると、タイムバーは避けるべき理由は：
+
+---
+
+# (1) First, markets do not process information at a constant time interval. 
+## まず、市場は一定の時間間隔で情報を処理しません。
+
+---
+
+# (2) Second, time-sampled series often exhibit poor statistical properties.
+## 第二に、タイムサンプリングされたシリーズは、しばしば貧弱な統計特性を示します。
+
+---
+
+# Lopez de Prado recommends tick, volume, or dollar-based bars.
+## ティック、ボリューム、またはドルベースのバーは勧められています。
+
+---
+
+# Each of the recommended bars creates a new bar after a threhold value is reached.
+## 各勧められているバーは、しきい値に達するとバーを作成します。
+
+---
+
+# For example, tick bars might create a new bar every 1000 transactions...
+## たとえば、ティックのバーは、1000トランザクションごとに新しいバーを作成し、
+
+---
+
+# And, dollar bars might create a new bar every $1,000,000.
+## そして、ドルバーは1,000,000ドルごとに新しいバーを作成します。
+
+---
+
+# Intuitively, such bars are more useful for algorithmic trading.
+## 直観的には、そういうなバーはアルゴリズム取引により良いです。
+
+---
+
+# When the markets are moving quickly, there will be more data points...
+## 市場が急速に動いているとき、より多くのデータポイントがあって、
+
+---
+
+# And, when markets are moving slowly, there will be fewer data points.
+## そして、市場がゆっくりと動いている場合、データポイントが少なくなります。
+
+---
+
+# Raw transaction data is necessary to create tick, volume, or dollar-based bars.
+## 生の取引データは、ティック、ボリューム、またはドルベースのバーを作成するために必要です。
+
+---
+
+# Usually, such data is very expensive.
+## 通常、そのようなデータは非常に高価です。
+
+---
+
+<SplitRight>
+
+<img width="50%" src={hudsonthames} />
+
+## [MLFinLab](https://github.com/hudson-and-thames/mlfinlab) is a Python package implementing Lopez de Prado's research.
+## mlfinlabはLopez de Pradoの研究を実装するpythonパッケージです。
+
+</SplitRight>
+
+---
+
+# For their research, the MLFinLab team bought tick data for $750.
+## 研究のため、MLFinLabチームはティックデータを750ドルで購入しました。
+
+---
+
+# If possible, I prefer to pay less.
+## 可能あれば、お金を使いたくないです。
+
+---
+
+<SplitRight>
+
+<img style="border-radius: 35px;" width="95%" src={quantconnect} />
+
+# One possibility is [QuantConnect](https://www.quantconnect.com/).
+## QuantConnectは可能です。
+
+</SplitRight>
+
+---
+
+# QuantConnect provides a backtesting engine called [Lean](https://github.com/QuantConnect/Lean) which is open source on Github...
+## QuantConnectは、GithubでオープンソースLeanと呼ばれるバックテストエンジンを提供して、
+
+---
+
+# As well as tick data for use in the backtesting engine.
+## さらに、バックテストエンジンで使用するためのティックデータも提供します。
+
+---
+
+# There is tick data for stocks, bonds, FX, etc.
+## 株式、債券、FXなどのティックデータがあります。
+
+---
+
+# Last month, [QuantConnect integrated Jupyter notebooks](https://www.quantconnect.com/blog/research-evolved-integrated-notebooks/) with their platform.
+## 先月、QuantconnectプラットフォームにJupyterノートブックの作成は統合されました。
+
+---
+
+# Machine learning libraries such as sklearn, tensorflow, pytorch, and fastai are [supported](https://www.quantconnect.com/docs/key-concepts/supported-libraries).
+## sklearn、tensorflow、pytorch、fastaiなどの機械学習ライブラリがサポートされています。
+
+---
+
+# Additionally, live trading is possible with large exchanges, such as Interactive Brokers (IB).
+## さらに、IBなどの大規模の取引所とのライブ取引が可能です。
+
+---
+
+# QuantConnect is free to use, although for live trading a monthly fee is required.
+## QuantConnectは無料で使用できますが、ライブ取引には月額料金が必要です。
+
+---
+
+# However, there are some problems.
+## しかし、問題があります。 
+
+---
+
+# (1) Although, tick bars are supported, volume or dollar bars are not.
+## ティックのバーはサポートされていますが、ボリュームバーまたはドルバーはサポートされていません。
+
+---
+
+# I [opened an issue](https://github.com/QuantConnect/Lean/issues/3754) in QuantConnect's GitHub repository about this.
+## これに関するissueを作成しました。
+
+---
+
+# (2) MLFinLab is not supported.
+## MLFinLabはサポートされていません。
+
+---
+
+# The MLFinLab team have opened an [issue](https://github.com/QuantConnect/Lean/issues/3791) to add the package to QuantConnect.
+## MLFinLabチームは、QuantConnectにそのパッケージを追加するためのissueを作成しました。
+
+---
+
+# (3) RAM is extremely [limited](https://www.quantconnect.com/pricing), which will be a problem in subsequent chapters.
+## RAMは非常に限られています。それは、本の次の章には問題になります
+
+---
+
+# Despite the problems, I think QuantConnect will be very interesting in the future.
+## 問題にもかかわらず、QuantConnectは将来非常に興味深いになると思います。
+
+---
+
+<SplitRight>
+
+<img style="border-radius: 35px;" width="75%" src={bitcoin} />
+
+# There is another source of tick data.
+## ティックデータの別のソースがあります。
+
+</SplitRight>
+
+---
+
+<SplitRight>
+
+<img style="border-radius: 35px;" width="80%" src={bitmex} />
+
+# Bitmex is one of the highest volume bitcoin exchanges in the world.
+## Bitmexは、世界最大のビットコイン取引所の1つです。
+
+</SplitRight>
+
+---
+
+# Bitmex is not a spot market, and the data of interest is the XBTUSD perpetual future contract.
+## Bitmexはスポット市場ではありません。関心のあるデータはXBTUSDの永続的な先物契約です。
+
+---
+
+# Bitmex provides free access to its historical data from its Amazon S3 bucket. 
+## Bitmexは、Amazon S3バケットから履歴データへの無料アクセスを提供します。
+
+---
+
+# I imported the XBTUSD data into Google BigQuery. 
+## XBTUSDデータをGoogle BigQueryにインポートしました。 
+
+---
+
+# It is sufficient to implement the tests described in Advances in Financial Machine Learning, Chapter 2. 
+## 「Advances in Financial Machine Learning」て言う本の第２章の説明されているテストを行うため十分です。
+
+---
+
+# In the paper by De Prado et al., "[The Volume Clock: Insights into the high frequency paradigm](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2034858)",...
+## De Pradoの論文「The Volume Clock：Insights to the high frequency paradigm」で、 
+
+---
+
+# ...it is recommended to use 1/50 of the average daily volume as the threshold for volume bars.
+## ボリュームバーのしきい値として、1日の平均ボリュームの1/50はお勧めです。
+
+---
+
+# Over a 1000 day period, Bitmex average daily volume was approximately $181,000,000.
+## 1000日間の1日の平均ボリュームは約181,000,000ドルでした。
+
+---
+
+# I decided to try $35,000,000 as the threshold.
+## しきい値として35,000,000ドルのを試すことにしました。　
+
+---
+
+# And, processed the data with MLFinLab.
+## そして、MLFinLabでデータを処理しました。
+
+---
+
+# For the 1000 day period, about 50,000 volume-based bars were sampled. 
+## 1000日間で、約50,000個のボリュームベースバーがサンプリングされました。
+
+---
+
+# For tick bars, I sampled 50,000 tick-based bars, with a threshold of 8000 transactions.
+## 8,000トランザクションのしきい値で、約50,000ティックベースのバーもサンプリングしました。
+
+---
+
+# Over the same period, there were about 48,000 30-minute time-based bars.
+## 同じ期間に、約48,000の30分の時間ベースのバーがありました。
+
+---
+
+# The MLFinLab team, has a [research respository](https://github.com/hudson-and-thames/research) on GitHub.
+## MLFinLabチームのgithubには研究リポジトリがあります。
+
+---
+
+# It is to answer the questions at the end of each chapter in "Advances in Financial Machine Learning".
+## そのリポジトリは「Advances in Financial Machine Learning」の各章の最後にある問題を解決するためです。
+
+---
+
+# In the [Jupyter notebook for chapter 2](https://github.com/hudson-and-thames/research/blob/master/Chapter2/Sample_Techniques.ipynb), a number of statistical tests are suggested.
+## 第2章のJupyterノートブックでは、いくつかの統計的検定が提案されています。
+
+---
+
+# Note, XBTUSD transactions are measured in U.S. dollars, so the volume bars are equivalent to dollar bars.
+## XBTUSDの取引は米ドルで測定されるため、ボリュームバーはドルバーに相当します。
+
+---
+
+<img width="50%" src={timeAuto} />
+
+---
+
+<img width="50%" src={tickAuto} />
+
+---
+
+<img width="50%" src={volumeAuto} />
+
+---
+
+# Interestingly, the Jarque-Bera normality test suggests the tick bars are closest to normal.
+## 興味深いことに、Jarque-Bera正規性テストは、正常に最も近いティックベースのバーを示唆しています。
+
+---
+
+# Lower is better.
+## 低いほうが良いです。
+
+```
+1. Time: 1251079
+2. Tick: 755924
+3. Volume: 938448
+```
+---
+
+# Standardizing and plotting the tick and volume bars demonstrates a partial recovery of normality.
+## ティックバーとボリュームバーを標準化してプロットすると、正常性が部分的に回復したことがわかります。
+
+---
+
+<img width="60%" src={partialNormality} />
+
+---
+
+# However, Bitcoin is anything but normal.
+## しかし、ビットコインは全然普通ではありません。
+
+---
+
+# The following, during an approximately $2000 price increase, should make clear why time-based bars are best avoided.
+## 次のチャートは、約2000ドルのポンプの間に、時間ベースのバーを避けるべき理由を明確にします。
+
+---
+
+<img width="55%" src={oct26Time} />
+
+#### Time, 4 bars
+
+---
+
+<img width="55%" src={oct26Tick} />
+
+#### Tick, 42 bars
+
+---
+
+<img width="55%" src={oct26Volume} />
+
+#### Volume, 67 bars
+
+---
+
+# During the same 2-hour period, volume bars create more meaningful data points.
+## 同じ2時間の間に、ボリュームバーはより意味のあるデータポイントを作成します。
+
+---
+
+# That’s all. Thanks for listening.
+## 以上です。ご清聴ありがとうございます。
